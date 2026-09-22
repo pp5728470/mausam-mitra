@@ -1,0 +1,138 @@
+.atmosphere-root {
+  isolation: isolate;
+}
+
+.atmosphere-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.atmosphere-orb-a {
+  top: -12%;
+  left: 50%;
+  width: min(52rem, 90vw);
+  height: min(28rem, 50vh);
+  translate: -50% 0;
+  background: radial-gradient(
+    circle,
+    rgb(14 165 233 / 22%) 0%,
+    rgb(14 165 233 / 0%) 70%
+  );
+  animation: atmosphere-drift-a 22s ease-in-out infinite;
+}
+
+.atmosphere-orb-b {
+  right: -8%;
+  bottom: -10%;
+  width: min(36rem, 80vw);
+  height: min(24rem, 42vh);
+  background: radial-gradient(
+    circle,
+    rgb(34 211 238 / 12%) 0%,
+    rgb(34 211 238 / 0%) 68%
+  );
+  animation: atmosphere-drift-b 28s ease-in-out infinite;
+}
+
+.atmosphere-orb-c {
+  left: -10%;
+  top: 38%;
+  width: min(28rem, 70vw);
+  height: min(20rem, 36vh);
+  background: radial-gradient(
+    circle,
+    rgb(56 189 248 / 10%) 0%,
+    rgb(56 189 248 / 0%) 70%
+  );
+  animation: atmosphere-drift-c 26s ease-in-out infinite;
+}
+
+.atmosphere-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+}
+
+.radar-sweep {
+  position: absolute;
+  inset: -38%;
+  border-radius: 9999px;
+  border: 1px solid rgb(56 189 248 / 16%);
+  box-shadow:
+    0 0 0 18px rgb(14 165 233 / 4%),
+    0 0 0 42px rgb(14 165 233 / 3%);
+  animation: radar-rotate 36s linear infinite;
+}
+
+.radar-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: inherit;
+  border: 1px solid rgb(34 211 238 / 12%);
+}
+
+.status-ping {
+  animation: status-pulse 2.2s ease-out infinite;
+}
+
+@keyframes atmosphere-drift-a {
+  0%,
+  100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    transform: translate(-48%, 6%) scale(1.06);
+  }
+}
+
+@keyframes atmosphere-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-4%, -5%);
+  }
+}
+
+@keyframes atmosphere-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5%, 4%);
+  }
+}
+
+@keyframes radar-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes status-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere-orb,
+  .radar-sweep,
+  .status-ping {
+    animation: none;
+  }
+}
